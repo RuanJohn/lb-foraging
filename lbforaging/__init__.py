@@ -23,7 +23,7 @@ partial_obs = [True, False]
 #         },
 #     )
 
-# Manually great Foraging experiments for scaling tests. 
+# Manually create Foraging experiments for scaling tests. 
 
 # 2 player, 2 food, 5x5
 register(
