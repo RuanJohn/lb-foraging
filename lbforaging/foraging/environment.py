@@ -298,7 +298,7 @@ class ForagingEnv(Env):
                         (row, col),
                         # deterministic level assignment. 
                         # agent_0 : 1, agent_1: 2, agent_2: 3
-                        i + 1,  
+                        int(i + 1),  
                         self.field_size,
                     )
                     break

@@ -7,7 +7,7 @@ register(
     entry_point="lbforaging.foraging:ForagingEnv",
     kwargs={
         "players": 3,
-        "max_player_level": 2,
+        "max_player_level": 3,
         "field_size": (15, 15),
         "max_food": 3,
         "sight": 15,
@@ -23,7 +23,7 @@ register(
     entry_point="lbforaging.foraging:ForagingEnv",
     kwargs={
         "players": 3,
-        "max_player_level": 2,
+        "max_player_level": 3,
         "field_size": (15, 15),
         "max_food": 3,
         "sight": 15,
