@@ -81,3 +81,19 @@ register(
         "grid_observation": False,
     },
 )
+
+# 100 player, 100 food, 35x35
+register(
+    id="Foraging-35x35-100p-100f-v2",
+    entry_point="lbforaging.foraging:ForagingEnv",
+    kwargs={
+        "players": 100,
+        "max_player_level": 2,
+        "field_size": (35, 35),
+        "max_food": 100,
+        "sight": 35,
+        "max_episode_steps": 50,
+        "force_coop": False,
+        "grid_observation": False,
+    },
+)
