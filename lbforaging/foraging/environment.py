@@ -84,6 +84,7 @@ class ForagingEnv(Env):
         force_coop,
         normalize_reward=True,
         grid_observation=False,
+        sum_food_level=False,
         penalty=0.0,
     ):
         self.logger = logging.getLogger(__name__)
@@ -93,7 +94,7 @@ class ForagingEnv(Env):
         self.field = np.zeros(field_size, np.int32)
 
         self.penalty = penalty
-        
+        self.sum_food_level = sum_food_level
         self.max_food = max_food
         self._food_spawned = 0.0
         self.max_player_level = max_player_level
@@ -284,7 +285,7 @@ class ForagingEnv(Env):
         return True
 
     def spawn_players(self, max_player_level):
-        for player in self.players:
+        for i, player in enumerate(self.players):
 
             attempts = 0
             player.reward = 0
@@ -295,7 +296,9 @@ class ForagingEnv(Env):
                 if self._is_empty_location(row, col):
                     player.setup(
                         (row, col),
-                        self.np_random.randint(1, max_player_level + 1),
+                        # deterministic level assignment. 
+                        # agent_0 : 1, agent_1: 2, agent_2: 3
+                        i + 1,  
                         self.field_size,
                     )
                     break
@@ -472,8 +475,13 @@ class ForagingEnv(Env):
         self.spawn_players(self.max_player_level)
         player_levels = sorted([player.level for player in self.players])
 
+        if self.sum_food_level: 
+            food_max_level = sum(player_levels[:3])
+        else: 
+            food_max_level = 3
+
         self.spawn_food(
-            self.max_food, max_level=sum(player_levels[:3])
+            self.max_food, max_level=food_max_level,
         )
         self.current_step = 0
         self._game_over = False
